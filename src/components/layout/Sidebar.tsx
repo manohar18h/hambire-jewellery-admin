@@ -35,6 +35,14 @@ export default function Sidebar() {
           <Package size={18} />
           Products
         </Link>
+        <Link
+          to="/banners"
+          className="flex items-center gap-2 hover:text-yellow-400"
+        >
+          <Package size={18} />
+          Banners
+        </Link>
+
       </nav>
     </aside>
   );

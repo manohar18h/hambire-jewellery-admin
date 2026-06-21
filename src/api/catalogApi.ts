@@ -5,7 +5,6 @@ import type {
   Product,
   ProductImage,
   StockWeightOption,
-  ProductWeightOption,
 } from "../types/catalog";
 
 type UploadResponse = {
@@ -20,6 +19,7 @@ export type ProductImageRequest = {
   primaryImage?: boolean;
   sortOrder?: number;
 };
+
 
 export const addProductImage = async (
   productId: number,
@@ -161,4 +161,37 @@ export const getStockWeightsByBox = async (
     params: { stockBox },
   });
   return res.data;
+};
+
+
+export type Banner = {
+  bannerId?: number;
+  title: string;
+  subTitle: string;
+  mediaUrl: string;
+  mediaType: "IMAGE" | "VIDEO";
+  sortOrder: number;
+  activeStatus: boolean;
+};
+
+export const getBanners = async (): Promise<Banner[]> => {
+  const res = await api.get("/admin/catalog/banners");
+  return res.data;
+};
+
+export const createBanner = async (payload: Banner): Promise<Banner> => {
+  const res = await api.post("/admin/catalog/banners", payload);
+  return res.data;
+};
+
+export const updateBanner = async (
+  bannerId: number,
+  payload: Banner,
+): Promise<Banner> => {
+  const res = await api.put(`/admin/catalog/banners/${bannerId}`, payload);
+  return res.data;
+};
+
+export const deleteBanner = async (bannerId: number): Promise<void> => {
+  await api.delete(`/admin/catalog/banners/${bannerId}`);
 };
